@@ -1,0 +1,3 @@
+- asynchronous operations should always be used on anything that might cause blocking (file access, for instance- media should be handled asynchronously)
+- MongoDB will take each operation independently; if one operation fails, the rest may succeed. Error checking is requried.
+-heroku local (starts on port 5000), not foreman.
