@@ -1,12 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var ctrlMain = require('../controllers/main')
 
-/* GET home page. */
-// routes pattern of home page to exposed func in main
-router.get('/', ctrlMain.index);
+var ctrlLocations = require('../controllers/locations')
+var ctrlOthers = require('../controllers/others')
 
-router.get('/test', function(req, res, next) {
-	res.render('index', {title: 'test'});
-});
+/*location routes*/
+router.get('/', ctrlLocations.homelist);
+router.get('/location', ctrlLocations.locationInfo);
+router.get('/location/review/new', ctrlLocations.addReview);
+
+/*other routes*/
+router.get('/about', ctrlOthers.about);
+
 module.exports = router;
