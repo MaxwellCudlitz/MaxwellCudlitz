@@ -1,127 +1,41 @@
-doctype html
-html
-  head
-    meta(name ='viewport', content = 'width=device-width, initial-scale=1.0')
-    title= title
-    link(rel='stylesheet', href='/bootstrap/css/amelia.bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+extends layout
 
-    //- navbar that collapses if necessary. Sticky.
-    .navbar.navbar-default.navbar-fixed-top
-      .container
-        .navbar-header
-          a.navbar-brand(href='/') Loc8r
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-main')
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-        #navbar-main.navbar-collapse.collapse
-          ul.nav.navbar-nav
-            li
-              a(href='/about/') About
+include _includes/sharedHTMLfunctions
 
-    //- holds the rest of the content belowe the navbar
-    .container
-      block content
-        #banner.page-header
-          .row
-            .col-lg-6
-              h1 Loc8r
-                small &nbsp; Find places to work with wifi near you!
-        .row
-          .col-xs-12.col-sm-8
-            .row.list-group
-              //- <single item>
-              .col-xs-12.list-group-item
-                h4
-                  a(href="/location") Starcups &nbsp;
-                  small &nbsp;
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star-empty
-                    span.glyphicon.glyphicon-star-empty
-                  span.badge.pull-right.badge-default 100m
-                p.address 125 high street, Reading, RG6 1PS
-                p
-                  span.label.label-warning Hot drinks
-                  | &nbsp;
-                  span.label.label-warning Food
-                  | &nbsp;
-                  span.label.label-warning Premium wifi
-                  | &nbsp;
-                //- <!single item>
-
-              //- <single item>
-              .col-xs-12.list-group-item
-                h4
-                  a(href="/location") Starcups &nbsp;
-                  small &nbsp;
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star-empty
-                    span.glyphicon.glyphicon-star-empty
-                  span.badge.pull-right.badge-default 100m
-                p.address 125 high street, Reading, RG6 1PS
-                p
-                  span.label.label-warning Hot drinks
-                  | &nbsp;
-                  span.label.label-warning Food
-                  | &nbsp;
-                  span.label.label-warning Premium wifi
-                  | &nbsp;
-              //- <!single item>
-
-              //- <single item>
-              .col-xs-12.list-group-item
-                h4
-                  a(href="/location") Starcups &nbsp;
-                  small &nbsp;
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star-empty
-                    span.glyphicon.glyphicon-star-empty
-                  span.badge.pull-right.badge-default 100m
-                p.address 125 high street, Reading, RG6 1PS
-                p
-                  span.label.label-warning Hot drinks
-                  | &nbsp;
-                  span.label.label-warning Food
-                  | &nbsp;
-                  span.label.label-warning Premium wifi
-                  | &nbsp;
-              //- <!single item>
-
-              //- <single item>
-              .col-xs-12.list-group-item
-                h4
-                  a(href="/location") Starcups &nbsp;
-                  small &nbsp;
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star-empty
-                    span.glyphicon.glyphicon-star-empty
-                  span.badge.pull-right.badge-default 100m
-                p.address 125 high street, Reading, RG6 1PS
-                p
-                  span.label.label-warning Hot drinks
-                  | &nbsp;
-                  span.label.label-warning Food
-                  | &nbsp;
-                  span.label.label-warning Premium wifi
-                  | &nbsp;
-              //- <!single item>
-          .col-xs-12.col-sm-4
-            p.lead Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake, or a pint? Let Loc8r help you find the place you're looking for.
+//- holds the rest of the content belowe the navbar
+.container
+  block content
+    #banner.page-header
+      .row
+        .col-lg-6
+          //- = indicates buffered code (javascript in this case)
+            HTML will be escaped in either of these injection methods.
+          h1= pageHeader.title
+            //- #{} deliniates inserted data
+            small &nbsp; #{pageHeader.strapline}
+    .row
+      .col-xs-12.col-sm-8
+        .row.list-group
+          //- <single item>
+          each location in locations
+            .col-xs-12.list-group-item
+              h4
+                a(href="/location")= location.name
+                small &nbsp;
+                  //- using the mixin (top of file)
+                  +outputRating(location.rating)
+                span.badge.pull-right.badge-default 100m
+              p.address 125 high street, Reading, RG6 1PS
+              p
+                +outputFacilities(location.facilities)
+            //- <!single item>
+      .col-xs-12.col-sm-4
+        p.lead = sidebar
 
 
-        footer
-          .row
-            .col-xs-12
-              small &copy; Maxwell Cudlitz, 2017
-    script(src='/javascripts/jquery-3.1.1.min.js')
-    script(src='/bootstrap/js/bootstrap.min.js')
+    footer
+      .row
+        .col-xs-12
+          small &copy; Maxwell Cudlitz, 2017
+script(src='/javascripts/jquery-3.1.1.min.js')
+script(src='/bootstrap/js/bootstrap.min.js')
