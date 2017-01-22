@@ -1,0 +1,92 @@
+db.locations.save({
+	name: 'Starcups',
+	address: '125 High Street, Reading, Rg6 1PS',
+	rating: 3,
+	facilities: ['Hot drinks', 'Food', 'Premium wifi'],
+	coords: [-0.9690884, 51.455041],
+	openingTimes: [{
+		days: 'Monday - Friday',
+		opening: '7:00am',
+		closing: '7:00pm',
+		closed: false
+	},{
+		days: 'Saturday',
+		opening: '8:00am',
+		closing: '5:00pm',
+		closed: false
+	},{
+		days: 'Sunday',
+		closed: true
+	}]
+})
+
+db.locations.save({
+	name: 'Big Mike\'s pump and dump',
+	address: '125 High Street, Reading, Rg6 1PS',
+	rating: 3,
+	facilities: ['Hot drinks', 'Food', 'Premium wifi', '- slippery floor'],
+	coords: [-4.9690864, 55.455041],
+	openingTimes: [{
+		days: 'Monday',
+		opening: '2:00am',
+		closing: '2:10am',
+		closed: false
+	},{
+		days: 'Tuesday - Sunday',
+		closed: true
+	}],
+	reviews: {
+		author: 'Mike Pence',
+		id: ObjectId(),
+		rating: 5,
+		timestamp: new Date("July 16, 2013"),
+		reviewText: "I\'ve never felt so full! The food was great too."
+	}
+})
+
+db.locations.save({
+	name: 'Bacon hutt',
+	address: '125 High Street, Reading, Rg6 1PS',
+	rating: 3,
+	facilities: ['Hot drinks', 'Food', 'Premium wifi', '- slippery floor'],
+	coords: [-4.9690864, 55.455041],
+	openingTimes: [{
+		days: 'Monday - Friday',
+		opening: '7:00am',
+		closing: '9:30pm',
+		closed: false
+	},{
+		days: 'Saturday - Sunday',
+		closed: true
+	}],
+	reviews: {
+		author: 'Jabba',
+		id: ObjectId(),
+		rating: 5,
+		timestamp: new Date("February 12, 2012"),
+		reviewText: "Ches ko ba tuta creesta crenko ya kolska!"
+	}
+})
+
+,{
+		author: 'Han',
+		id: ObjectId(),
+		rating: 2,
+		timestamp: new Date("February 12, 2012"),
+		reviewText: "A bad crowd runs there. I wouldn't reccommend going there unless you are looking for a fight"
+	}
+
+
+db.locations.update({
+	name: 'Starcups'
+}, {
+	$push: {
+		reviews: {
+			author: 'Simon Holmes',
+			id: ObjectId(),
+			rating: 5,
+			timestamp: new Date("July 16, 2013"),
+			reviewText: "What a great place. I can't say enough good things about it!"
+		}
+	}
+})
