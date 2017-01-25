@@ -29,6 +29,11 @@ module.exports.reviewsReadOne = function (req, res) {
                     /// not properly retrieving reviews.
                     ///
                     review = location.reviews.id(req.params.reviewid);
+
+                    //  this line used for debugging
+                    //  sendJsonResponse(res, 200, location.reviews)r;
+                    //  return;
+
                     if (!review) {
                         sendJsonResponse(res, 404, { "message": "reviewid not found" });
                     } else {
@@ -37,7 +42,7 @@ module.exports.reviewsReadOne = function (req, res) {
                             location: {
                                 name: location.name, id: req.params.locationid
                             },
-                            review: review
+                            review : review
                         };
                         sendJsonResponse(res, 200, response);
                     }
