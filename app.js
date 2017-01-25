@@ -4,11 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-require('./app_server/models/db')
+require('./app_api/models/db');
 
-var index = require('./app_server/routes/index');
+// routes direct requests to proper endpoints.
+var routes = require('./app_server/routes/index');
+var routesApi = require('./app_api/routes/index');
 var users = require('./app_server/routes/users');
 
+// defines 'app' as an express application.
 var app = express();
 
 // view engine setup
@@ -23,7 +26,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+// specifies controllers / routers.
+app.use('/', routes);
+app.use('/api', routesApi);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

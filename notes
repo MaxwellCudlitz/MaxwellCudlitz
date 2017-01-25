@@ -1,3 +1,16 @@
 - asynchronous operations should always be used on anything that might cause blocking (file access, for instance- media should be handled asynchronously)
 - MongoDB will take each operation independently; if one operation fails, the rest may succeed. Error checking is requried.
 -heroku local (starts on port 5000), not foreman.
+-HTTPMethods are ways of changing interaction with specific endpoints.
+-Subocuments will require an objectID to be passed as an argument to be retrieved properly.
+-REST APIs always will respond with something. 
+	200 OK (GET/PUT), 
+	201 (POST), 
+	204 (DELETE), 
+	400 (bad GET, POST, or PUT due to bad content), 
+	401 (unauthorized), 
+	403 (forbidden; not allowed), 
+	404 (not found), 
+	405 (method not allowed; requets method not allowed for the given URL)
+	409 (Conflict; unsuccesful POST, another object with the same data already exists),
+	500 (Internal service error; something's messed up on the inside)
