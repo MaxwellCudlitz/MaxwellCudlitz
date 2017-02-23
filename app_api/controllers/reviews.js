@@ -40,7 +40,7 @@ module.exports.reviewsReadOne = function (req, res) {
                         // formats response JSON
                         response = {
                             location: {
-                                name: location.name, id: req.params.locationid
+                                name: location.name, _id: req.params.locationid
                             },
                             review : review
                         };

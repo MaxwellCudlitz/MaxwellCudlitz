@@ -6,6 +6,24 @@ var sendJsonResponse = function(res, status, content){
     res.json(content);
 };
 
+var theEarth = (function(){
+
+    var earthRadius = 6371;
+
+    var getDistanceFromRads = function(rads){
+        return parseFloat(rads * earthRadius);
+    };
+
+    var getRadsFromDistance = function(distance){
+        return parseFloat(distance / earthRadius);
+    };
+
+    return{
+        getDistanceFromRads : getDistanceFromRads,
+        getRadsFromDistance : getRadsFromDistance
+    };
+});
+
 // reads one location from the database.
 module.exports.locationsReadOne = function(req, res) {
     
