@@ -134,16 +134,30 @@ module.exports.locationsReadOne = function (req, res) {
         sendJsonResponse(res, 404, { "message": "No locationid in request" });
     }
 
-
 };
 
-module.exports.locationsCreate = function (req, res) {
-    sendJsonResponse(res, 200, { "status": "success" });
+// create a review
+module.exports.reviewsCreate = function(req, res) {
+    var locationid = req.params.locationid;
+    if (locationid) {
+        Loc
+        .findById(locationid)
+        .select('reviews')
+        .exec(
+        function(err, location) {
+            if (err) {
+                sendJsonResponse(res, 400, err);
+            } else {
+                doAddReview(req, res, location);
+            }
+    });
+    } else {
+            sendJsonResponse(res, 404, {
+            "message": "Not found, locationid required"
+        });
+    }
 };
 
-module.exports.locationsListByDistance = function (req, res) {
-    sendJsonResponse(res, 201, { "status": "success" });
-};
 
 module.exports.locationsUpdateOne = function (req, res) {
     sendJsonResponse(res, 201), { "status": "success" };
