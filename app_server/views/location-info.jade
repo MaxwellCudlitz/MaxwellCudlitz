@@ -49,9 +49,9 @@ block content
                         .well.well-sm.review-header
                           span.rating
                             +outputRating(review.rating)
-                          span.reviewAuthor &nbsp; #{review.author}
+                            span.reviewAuthor #{review.author}
                           small.reviewTimestamp
-                            +formatDate(review.timestamp)
+                            +formatDate(review.createdOn)
                         .col-xs-12
                           p !{(review.reviewText).replace(/\n/g, '<br/>')}
                 
