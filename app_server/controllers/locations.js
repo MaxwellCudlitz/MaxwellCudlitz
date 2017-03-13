@@ -32,48 +32,14 @@ request(requestOptions, function(err, response, body) {
 
 var renderHomepage = function(req, res, responseBody){
 
-	var message;
-	if(!(responseBody instanceof Array)){
-		message = "API lookup error";
-		responseBody = [];
-	} else {
-		if (!responseBody.length){
-			message = "no places found nearby!";
-		}
-	}
 	res.render('locations-list', {
-		title: 'Loc8r- find a place to work with wifi',
-		pageHeader:{
-			title: 'Loc8r',
-			strapline: 'find places to work with wifi near you!'
-		},
-		sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake, or a pint? Let Loc8r help you find the place you're looking for.",
-		locations: responseBody,
-		message : message
-
-/*
-		[
-		{
-			name: 'Starcups',
-			address: '125 High Street, Reading, RG6 1PS',
-			rating: 3,
-			facilities: ['Hot drinks', 'Food', 'Premium Wifi'],
-			distance: '100m'
-		},{
-			name: 'Cafe Hero',
-			address: '125 High Street, Reading, RG6 1PS',
-			rating: 4,
-			facilities: ['Hot drinks', 'Food', 'Premium Wifi'],
-			distance: '100m'
-		},{
-			name: 'Burger Queen',
-			address: '125 High Street, Reading, RG6 1PS',
-			rating: 2,
-			facilities: ['Food', 'Business Wifi'],
-			distance: '100m'
-		}]
-		*/
-	});
+    title: 'Loc8r - find a place to work with wifi',
+	pageHeader: {
+      title: 'Loc8r',
+      strapline: 'Find places to work with wifi near you!'
+    },
+    sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for."
+   });
 }
 
 module.exports.homelist = function(req, res){
@@ -86,7 +52,7 @@ module.exports.homelist = function(req, res){
 		qs : {
 			lng : -0.7992599,
 			lat : 51.378091,
-			maxDistance : 200000000000000
+			maxDistance : 200000000
 		}
 	};
 
