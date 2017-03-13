@@ -24,8 +24,8 @@ include _includes/sharedHTMLfunctions
                 small &nbsp;
                   //- using the mixin (top of file)
                   +outputRating(location.rating)
-                span.badge.pull-right.badge-default 100m
-              p.address 125 high street, Reading, RG6 1PS
+              span.badge.pull-right.badge-default= location.distance
+              p.address= location.address
               p
                 +outputFacilities(location.facilities)
             //- <!single item>
