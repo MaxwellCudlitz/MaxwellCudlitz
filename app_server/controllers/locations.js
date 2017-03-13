@@ -120,16 +120,18 @@ var _formatDistance = function(distance){
 	return numDistance + unit;
 }
 
-
-module.exports.locationInfo = function(req, res){
+var renderDetailPage = function(req, res, locDetail){
 	res.render('location-info', {
-		title: 'Starcups',
-		pageHeader:{title: 'Starcups'},
+		title: locDetail.name,
+		pageHeader:{title: locDetail.name},
 		sidebar:{
 			context: 'is on Loc8r because it has fast wifi and space to sit down with your laptop.',
 			callToAction: 'If you\'ve been there and you liked it, or you didn\'t, please leave a review to let others know and improve our service!'
 		},
-		location:{
+		location: locDetail
+
+/*
+		{
 			rating: 4,
 			address: '125 High Street, Reading, RG6 1PS',
 			facilities: ['Hot drinks', 'Food', 'Premium wifi'],
@@ -162,7 +164,30 @@ module.exports.locationInfo = function(req, res){
 				reviewText: 'Good wifi, bad coffee.'
 			}]
 		}
+		*/
 	});
+}
+
+module.exports.locationInfo = function(req, res){
+	var requestOptions, path;
+	path = "/api/locations/" + req.params.locationid;
+	requestOptions = {
+		url : apiOptions.server	+ path,
+		method : "GET",
+		json : {}
+	};
+	request(
+		requestOptions,
+		function(err, response, body){
+			var data = body;
+			data.coords = {
+				lng : body.coords[0],
+				lat : body.coords[1]
+			}
+
+			renderDetailPage(req, res, data);
+		});
+	
 };
 
 module.exports.addReview = function(req, res){
