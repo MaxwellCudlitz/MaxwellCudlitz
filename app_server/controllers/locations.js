@@ -180,19 +180,104 @@ module.exports.locationInfo = function(req, res){
 		requestOptions,
 		function(err, response, body){
 			var data = body;
-			data.coords = {
-				lng : body.coords[0],
-				lat : body.coords[1]
+			if(response.statusCode === 200){
+				data.coords = {
+					lng : body.coords[0],
+					lat : body.coords[1]
+				}
+			} else {
+				_showError(req, res, response.statusCode)
 			}
-
+			
 			renderDetailPage(req, res, data);
 		});
 	
 };
 
-module.exports.addReview = function(req, res){
+var renderReviewForm = function(req, res, locDetail){
 	res.render('location-review-form', {
-		title : "Review Starcups on Loc8r",
-		pageHeader: {title: 'Review Starcups'}
+		title: 'Review ' + locDetail.name + ' on Loc8r',
+		pageHeader : {title : 'Review' + locDetail.name}
 	});
+};
+
+module.exports.doAddReview = function(req, res){
+	var requestOptions, path, locationid, postdata;
+	locationid = req.params.locationid;
+	path = '/api/locations/' + locationid + '/reviews';
+	postdata = {
+		author : req.body.name,
+		rating : parseInt(req.body.rating, 10),
+		reviewText : req.body.review
+	};
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : 'POST',
+		json : postdata
+	};
+	request(
+		requestOptions,
+		function(err, response, body){
+			if(response.statusCode === 201){
+				res.redirect('/location/' + locationid);
+			} else {
+				_showError(req, res, response.statusCode);
+			}
+		});
+};
+
+var getLocationInfo = function(req, res, callback){
+	var requestOptions, path;
+	path = '/api/locations/' + req.params.locationid;
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : 'GET',
+		json : {}
+	};
+	request(
+		requestOptions,
+		function(err, response, body){
+			var data = body;
+			if(response.statusCode === 200){
+				data.coords = {
+					lng : body.coords[0],
+					lat : body.coords[1]
+				};
+				callback(req, res, data);
+			} else {
+				_showError(req, res, response.statusCode);
+			}
+		}
+	);
+};
+
+module.exports.locationInfo = function(req, res){
+	getLocationInfo(req, res, function(req, res, responseData){
+		renderDetailPage(req, res, responseData);
+	});
+};
+
+module.exports.addReview = function(req, res){
+	getLocationInfo(req, res, function(req, res, responseData){
+		renderReviewForm(req, res, responseData);
+	});
+};
+
+var _showError = function (req, res, status) {
+  var title, content;
+  if (status === 404) {
+    title = "404; page not found";
+    content = "Not found :(";
+  } else if (status === 500) {
+    title = "500; internal server error";
+    content = "There's a problem with our server, please send an email to maxwell.cudlitz@gmail.com if this persists.";
+  } else {
+    title = status + "Something's gone wrong";
+    content = "Something, somewhere, has gone just a little (or very) wrong. Please send an email to maxwell.cudlitz@gmail.com if this persists.";
+  }
+  res.status(status);
+  res.render('generic-text', {
+    title : title,
+    content : content
+  });
 };
