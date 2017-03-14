@@ -19,7 +19,7 @@
 				<a href="/location/{{ location._id }}">{{ location.name }}</a>
 				<small class="rating-stars" rating-stars
 				rating="location.rating"></small>
-				<span class="badge pull-right badge-default">{{ location.distance
+				<span class="badge pull-right badge-default">{{ location.distance | formatDistance 
 				}}</span>
 			</h4>
 			<p class="address">{{ location.address }}</p>
