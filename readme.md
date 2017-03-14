@@ -71,7 +71,7 @@ Features implemented;
 
 **Screenshot**
 ***
-![N|Solid](http://i.imgur.com/uP3lqcm.png)
+![N|Solid](http://i.imgur.com/h3yMDRP.png)
 
 ***
 
@@ -99,4 +99,24 @@ The features that were implemented at this time are as follows;
 
 **Screenshot**
 ***
+![N|Solid](http://i.imgur.com/3o2BjpW.png)
+***
+
+# Chapter 5
+
+**Screenshot**
+***
 ![N|Solid](http://i.imgur.com/ujd6N4i.png)
+***
+
+# Chapter 4
+
+***
+![N|Solid](http://i.imgur.com/juYKynw.png)
+***
+
+# Chapter 3
+
+Did not commit at this point
+
+
