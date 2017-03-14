@@ -10,6 +10,11 @@ function config ($routeProvider) {
 
 		// point to new template
 		templateUrl: 'home/home.view.html'
+
+		controller: 'homeCtrl' 
+
+		// forces proper data containment
+		controllerAs: 'vm' 
 	})
 	.otherwise({redirectTo: '/'});
 }
