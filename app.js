@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 require('./app_api/models/db');
 
+
 // routes direct requests to proper endpoints.
 var routes = require('./app_server/routes/index');
 var routesApi = require('./app_api/routes/index');
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app_client')));
 
 // specifies controllers / routers.
 app.use('/', routes);
