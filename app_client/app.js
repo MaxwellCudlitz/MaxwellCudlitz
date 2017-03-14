@@ -1,7 +1,7 @@
 (function () {
 
-  angular.module('loc8rApp', ['ngRoute', 'ngSanitize']);
-
+  angular.module('loc8rApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
+  
   // little bug fix for stupid user scenarios
   if (window.location.pathname !== '/') {
     window.location.href = '/#' + window.location.pathname;
