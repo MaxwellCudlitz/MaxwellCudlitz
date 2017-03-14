@@ -31,6 +31,7 @@ var appClientFiles = [
   	'app_client/locationDetail/locationDetail.controller.js',
 	'app_client/common/services/geolocation.service.js',
 	'app_client/common/services/loc8rData.service.js',
+	'app_client/common/filters/addHtmlLineBreaks.filter.js',
 	'app_client/common/filters/formatDistance.filter.js',
 	'app_client/common/directives/ratingStars/ratingStars.directive.js',
   	'app_client/common/directives/footerGeneric/footerGeneric.directive.js',

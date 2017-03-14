@@ -9,7 +9,18 @@
 						<h2 class="panel-title">Opening hours</h2>
 					</div>
 					<div class="panel-body">
-						<!-- Opening times to go here -->
+						<div class="panel-heading">
+							<h2 class="panel-title">Opening hours</h2>
+						</div>
+						<div class="panel-body">
+							<p ng-repeat="time in vm.data.location.openingTimes" ng-switch
+							on="time.closed">
+							{{ time.days }} :
+							<span class="opening-time" ng-switch-when="true">closed</span>
+							<span class="opening-time" ng-switch-default>{{ time.opening + " - " +
+								time.closing }}</span>
+							</p>
+						</div>
 					</div>
 				</div>
 				<div class="panel panel-primary">
@@ -32,46 +43,39 @@
 				</div>
 				<div class="panel-body">
 					
-					<img src="https://maps.googleapis.com/maps/api/staticmap?center=={{
-vm.data.location.coords[1] }},{{ vm.data.location.coords[0]
-}}&zoom=13&size=600x300&maptype=roadmap&key=AIzaSyDG8bf3DbDQWvfSxU_HMY6vd6pLj_0G4uI"  class="img-responsive img-rounded">
-		</div>
-	</div>
-</div>
-</div>
-<div class="row">
-	<div class="col-xs-12">
-		<div class="panel panel-primary review-panel">
-			<div class="panel-heading"><a href="" class="btn btn-default pullright">Add
-				review</a>
-				<h2 class="panel-title">Customer reviews</h2>
-			</div>
-			<div class="panel-body review-container">
-				<div class="review" ng-repeat="review in
-				vm.data.location.reviews">
-				<div class="row">
-					<div class="well well-sm review-header">
-						<span class="rating" rating-stars rating="review.rating"></
-							span>
-							<span class="reviewAuthor">{{ review.author }}</span>
-							<small class="reviewTimestamp">{{ review.createdOn }}</
-								small>
-							</div>
-							<div class="col-xs-12">
-								<p ng-bind-html="review.reviewText | addHtmlLineBreaks"></p>
-							</div>
-						</div>
-					</div>
+					<img src="https://maps.googleapis.com/maps/api/staticmap?center=={{ vm.data.location.coords[1] }},{{ vm.data.location.coords[0] }}&zoom=13&size=600x300&maptype=roadmap&key=AIzaSyDG8bf3DbDQWvfSxU_HMY6vd6pLj_0G4uI"  class="img-responsive img-rounded">
 				</div>
-			</div>
-		</div>
-	</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-primary review-panel">
+            <div class="panel-heading"><a ng-click="vm.popupReviewForm()" class="btn btn-default pull-right">Add review</a>
+              <h2 class="panel-title">Customer reviews</h2>
+            </div>
+            <div class="panel-body review-container">
+              <div class="row">
+                <div class="review" ng-repeat="review in vm.data.location.reviews | orderBy:'createdOn':true">
+                  <div class="well well-sm review-header">
+                    <span class="rating" rating-stars rating="review.rating"></span>
+                    <span class="reviewAuthor">{{ review.author }}</span>
+                    <small class="reviewTimestamp">{{ review.createdOn | date : 'd MMMM yyyy' }}</small>
+                  </div>
+                  <div class="col-xs-12">
+                    <p ng-bind-html="review.reviewText | addHtmlLineBreaks"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <p class="lead">{{ vm.data.location.name }} is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.</p>
+      <p>If you've been and you like it - or if you don't - please leave a review to help other people just like you.</p>
+    </div>
+  </div>
+  <footer-generic></footer-generic>
 </div>
-<div class="col-xs-12 col-md-3">
-	<p class="lead">{{ vm.data.location.name }} is on Loc8r because it has
-		accessible wifi and space to sit down with your laptop and get some work
-		done.</p>
-		<p>If you've been and you like it - or if you don't - please leave a
-			review to help other people just like you.</p>
-		</div>
-	</div>

@@ -1,6 +1,6 @@
 (function () {
 
-  angular.module('loc8rApp', ['ngRoute']);
+  angular.module('loc8rApp', ['ngRoute', 'ngSanitize']);
 
   // little bug fix for stupid user scenarios
   if (window.location.pathname !== '/') {
