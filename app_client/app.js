@@ -15,6 +15,6 @@
 	}
 
 	angular
-	.module('loc8rApp')
-	.config(['$routeProvider', config]);
+		.module('loc8rApp')
+		.config(['$routeProvider', config]);
 }) (); // close and invoke
