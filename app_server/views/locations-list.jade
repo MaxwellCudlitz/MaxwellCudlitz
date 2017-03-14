@@ -12,13 +12,13 @@ block content
     .col-xs-12.col-sm-8(ng-controller="locationListCtrl")
       .error {{ message }}
       .row.list-group
-        .col-xs-12.list-group-item(ng-repeat="location in data.locations | filter : textFilter")
+        .col-xs-12.list-group-item(ng-repeat="location in data.locations")
           h4 
             a(href="/location/{{ location._id }}") {{ location.name }}
             small.rating-stars(rating-stars, rating="location.rating")
             //- small
             //-   rating-stars(rating="location.rating")
-            span.badge.pull-right.badge-default {{ location.distance | formatDistance }}
+            span.badge.pull-right.badge-default {{ location.distance | formatDistance  }}
           p.address {{ location.address }}
           p
             span.label.label-warning.label-facility(ng-repeat="facility in location.facilities")
