@@ -5,7 +5,7 @@ angular
 function loc8rData ($http) {
 	var locationByCoords = function (lat, lng) {
 		return $http.get('/api/locations?lng=' + lng + '&lat=' + lat +
-			'&maxDistance=20');
+			'&maxDistance=200000000000');
 	};
 	return {
 		locationByCoords : locationByCoords
