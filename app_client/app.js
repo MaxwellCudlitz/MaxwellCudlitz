@@ -1,5 +1,3 @@
-angular.module('loc8rApp', []);
-
 // is actualy angular routing
 angular.module('loc8rApp', ['ngRoute']);
 
@@ -7,14 +5,10 @@ angular.module('loc8rApp', ['ngRoute']);
 function config ($routeProvider) {
 	$routeProvider
 	.when('/', {
-
-		// point to new template
-		templateUrl: 'home/home.view.html'
-
-		controller: 'homeCtrl' 
-
-		// forces proper data containment
-		controllerAs: 'vm' 
+	// point to new template
+	templateUrl: 'home/home.view.html',
+	controller: 'homeCtrl',
+	controllerAs: 'vm'
 	})
 	.otherwise({redirectTo: '/'});
 }
